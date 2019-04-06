@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">InventoryManagement</string>
+    <string name="title_activity_add_new_item">AddNewItem</string>
+    <string name="title_activity_view_inventory">ViewInventory</string>
+</resources>
