@@ -31,6 +31,7 @@
         android:ems="10"
         android:hint="Enter Delivery Date"
         android:inputType="date"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textColorHint="@color/common_google_signin_btn_text_dark_default" />
 
     <Spinner
@@ -52,5 +53,9 @@
         android:layout_width="142dp"
         android:layout_height="wrap_content"
         android:text="SUBMIT" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

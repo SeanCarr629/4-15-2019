@@ -29,7 +29,7 @@ public class AddNewItem extends AppCompatActivity {
     String itemName;
     Integer itemQuantity;
     int count = 0;
-    DatePickerDialog.OnDateSetListener dateSetListener;
+
 
 
     @Override
@@ -74,7 +74,8 @@ public class AddNewItem extends AppCompatActivity {
                                             inventory.setItemQuantity(itemQuantity);
                                             reff.child(snapshot.getKey()).setValue(inventory);
 
-                                            Toast.makeText(AddNewItem.this, "Item Updated", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(AddNewItem.this, "Item Updated",
+                                                    Toast.LENGTH_LONG).show();
 
                                         }
 

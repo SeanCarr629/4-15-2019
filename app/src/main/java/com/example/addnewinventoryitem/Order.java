@@ -9,8 +9,15 @@ public class Order implements Serializable {
 
 String date;
 ArrayList<Inventory> inventory = new ArrayList<Inventory>();
+Inventory items;
 
 
+
+
+    public Order()
+    {
+        date = "0";
+    }
 
 
     public Order(String _date, Inventory items) {
@@ -40,6 +47,12 @@ ArrayList<Inventory> inventory = new ArrayList<Inventory>();
         this.inventory = inventory;
     }
 
+    public void addItem (Inventory item)
+    {
 
+        inventory.add(item);
+
+
+    }
 
 }

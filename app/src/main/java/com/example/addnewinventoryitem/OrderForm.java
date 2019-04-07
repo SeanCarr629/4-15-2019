@@ -1,5 +1,8 @@
 package com.example.addnewinventoryitem;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -18,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class OrderForm extends AppCompatActivity {
@@ -27,9 +32,11 @@ public class OrderForm extends AppCompatActivity {
    Button btnSubmit;
    FirebaseDatabase database;
    DatabaseReference reff;
-   String date,itemName, selectedItem, spinnerItem;
+   String date, itemName, selectedItem, spinnerItem, date2;
    Spinner spinner;
    Integer quantity;
+   DatePickerDialog.OnDateSetListener dateSetListener;
+   Integer count = 0;
 
 
     @Override
@@ -45,7 +52,32 @@ public class OrderForm extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         reff = database.getReference("NewOrders");
 
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
 
+                DatePickerDialog dialog = new DatePickerDialog(OrderForm.this,
+                        android.R.style.Theme_Holo, dateSetListener, year, month, day
+                );
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month +1;
+              date2 = month + "/" + dayOfMonth + "/" + year;
+               etDate.setText(date2);
+
+
+            }
+        };
 
 
 
@@ -119,26 +151,48 @@ public class OrderForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                date = etDate.getText().toString();
+                quantity = Integer.parseInt(etQuantity.getText().toString());
+
+
+
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange( DataSnapshot dataSnapshot) {
 
-               date = etDate.getText().toString();
-               quantity = Integer.parseInt(etQuantity.getText().toString());
-
-                Inventory item = new Inventory();
-                item.setItemName(spinnerItem);
-                item.setItemQuantity(quantity);
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Order order = snapshot.getValue(Order.class);
 
 
-                Order order = new Order(date,item);
+                    if(order.getDate().equals(date2)) {
+                        count = 1;
+                        Inventory item = new Inventory();
+                        item.setItemName(spinnerItem);
+                        item.setItemQuantity(quantity);
+                        order.addItem(item);
+                        reff.child(snapshot.getKey()).setValue(order);
 
-                reff.push().setValue(order);
+                      //  Toast.makeText(AddNewItem.this, "Item Updated",
+                        //        Toast.LENGTH_LONG).show();
+
+                    }
 
 
 
 
+                }
 
+                if (count == 0) {
+                    Inventory item = new Inventory();
+                    item.setItemName(spinnerItem);
+                    item.setItemQuantity(quantity);
+                    Order order = new Order(date, item);
+                    reff.push().setValue(order);
+                }
+
+
+
+                count = 0;
 
 
 
