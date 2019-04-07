@@ -1,5 +1,6 @@
 package com.example.addnewinventoryitem;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class AddNewItem extends AppCompatActivity {
     String itemName;
     Integer itemQuantity;
     int count = 0;
+    DatePickerDialog.OnDateSetListener dateSetListener;
 
 
     @Override

@@ -53,7 +53,8 @@ Button btnSubmitNumber, btnSubmitItem;
         database = FirebaseDatabase.getInstance();
         reff = database.getReference();
 
-        FirebaseDatabase.getInstance().getReference("Inventory").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("Inventory").addValueEventListener
+                (new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 // Is better to use a List, because you don't know the size
