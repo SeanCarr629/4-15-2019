@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderForm"></activity>
+        <activity android:name=".ViewOrderInfo" />
+        <activity android:name=".OrderForm" />
         <activity android:name=".SpinnerTest" />
         <activity android:name=".ViewInventory" />
         <activity android:name=".AddNewItem" />

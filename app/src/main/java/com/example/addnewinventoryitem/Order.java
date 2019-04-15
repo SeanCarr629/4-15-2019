@@ -8,22 +8,23 @@ public class Order implements Serializable {
 
 
 String date;
-ArrayList<Inventory> inventory = new ArrayList<Inventory>();
+ArrayList<Inventory> inventory;
 Inventory items;
 
 
+public Order ()
+{
+    this.date = "0";
+    this.inventory = new ArrayList<Inventory>();
 
+            }
 
-    public Order()
-    {
-        date = "0";
-    }
 
 
     public Order(String _date, Inventory items) {
 
         date = _date;
-
+        this.inventory = new ArrayList<Inventory>();
         inventory.add(items);
 
 
@@ -40,7 +41,7 @@ Inventory items;
     }
 
     public ArrayList<Inventory> getInventory() {
-        return inventory;
+        return this.inventory;
     }
 
     public void setInventory(ArrayList<Inventory> inventory) {
@@ -52,6 +53,12 @@ Inventory items;
 
         inventory.add(item);
 
+
+    }
+
+    public String getItemName(int j) {
+
+       return this.inventory.get(j).getItemName();
 
     }
 

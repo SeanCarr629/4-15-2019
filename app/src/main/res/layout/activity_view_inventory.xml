@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0277BD"
+    android:background="@mipmap/woodblue"
     tools:context=".ViewInventory">
 
     <ListView
@@ -19,9 +19,13 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="108dp"
-        android:layout_height="29dp"
+        android:layout_width="421dp"
+        android:layout_height="37dp"
+        android:gravity="center_horizontal"
         android:text="INVENTORY"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
